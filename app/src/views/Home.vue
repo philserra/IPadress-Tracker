@@ -41,6 +41,7 @@ export default {
     let mymap;
     const queryIp = ref("");
     const ipInfo = ref(null);
+    console.log(ipInfo);
 
     onMounted(() => {
       mymap = leaflet.map("map").setView([42.5145, -83.0147], 9);
@@ -64,9 +65,10 @@ export default {
     const getIpInfo = async () => {
       try {
         const data = await axios.get(
-          `https://geo.ipify.org/api/v2/country?apiKey=at_dq7GpVfBCtQzfLamk0FrzgtskdlE7&ipAddress=${queryIp.value}`
+          `https://geo.ipify.org/api/v2/country,city?apiKey=at_dq7GpVfBCtQzfLamk0FrzgtskdlE7&ipAddress=${queryIp.value}`
         );
         const result = data.data;
+        console.log(result);
         ipInfo.value = {
           address: result.ip,
           state: result.location.region,
